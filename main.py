@@ -2,7 +2,7 @@
 import os
 import streamlit as st
 from poi import import_attractions
-from models import call_GPT, call_TTS
+from models import call_GPT_stream, call_TTS
 
 
 
@@ -15,7 +15,8 @@ if __name__ == "__main__":
     
     attraction_names = [attraction["nice_name"] for attraction in attractions]
     
-    selected_attraction = st.radio("Select an attraction:", attraction_names)
+    #selected_attraction = st.radio("Select an attraction:", attraction_names)
+    selected_attraction = st.pills("Select an attraction:", attraction_names, selection_mode="single")
 
     st.write(f"You selected: {selected_attraction}")
 
@@ -24,10 +25,10 @@ if __name__ == "__main__":
     if generate:
         model = "gpt-4o-mini"
         prompt = "You are a local travel guide based in Barcelona. Please provide an extensive description of the tourist attraction called " + selected_attraction + ". Include information about its history, architecture, and any interesting facts. Also, describe location, opening hours, the best time to visit and any nearby attractions or food options worth exploring. This content will help you plan your visit but also to guide you through the experience when you are there. Please provide the information in a friendly and engaging tone, as if you were sharing it with a friend who is visiting Barcelona for the first time."
-        res = call_GPT(model, prompt)
-        call_TTS("gpt-4o-mini-tts",res.content)
+        #res = call_GPT(model, prompt)
+        result = st.write_stream(call_GPT_stream(model, prompt))
+        call_TTS("gpt-4o-mini-tts",result)
         st.audio("attraction.mp3")
-        st.write(res.content)
         
     
     
