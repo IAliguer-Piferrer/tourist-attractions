@@ -31,7 +31,7 @@ def call_TTS(model, text):
     client = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
     response = client.audio.speech.create(model=model, 
                                           input=text, 
-                                          voice="fable")
+                                          voice="coral")
     with open("attraction.mp3", "wb") as f:
         f.write(response.content)
     return

@@ -18,9 +18,9 @@ if __name__ == "__main__":
     #selected_attraction = st.radio("Select an attraction:", attraction_names)
     selected_attraction = st.pills("Select an attraction:", attraction_names, selection_mode="single")
 
-    st.write(f"You selected: {selected_attraction}")
+    #st.write(f"You selected: {selected_attraction}")
 
-    generate = st.button("Generate content")
+    generate = st.button("Generate content", type="primary")
 
     if generate:
         model = "gpt-4o-mini"
