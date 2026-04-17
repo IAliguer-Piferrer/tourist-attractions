@@ -74,6 +74,8 @@ async def generate_tts_progressively(input_text: str, voice_name: str):
 
 if __name__ == "__main__":
 
+    st.set_page_config(page_title="Barcelona Attractions", page_icon=":ferris_wheel:")
+
     st.title("Barcelona Tourist Attractions")
     st.header("Generate text and audio content for Barcelona's top tourist attractions")
 
@@ -93,7 +95,7 @@ if __name__ == "__main__":
         prompt = "You are a local travel guide based in Barcelona. Please provide an extensive description of the tourist attraction called " + selected_attraction + ". Include information about its history, architecture, and any interesting facts. Also, describe location, opening hours, the best time to visit and any nearby attractions or food options worth exploring. This content will help you plan your visit but also to guide you through the experience when you are there. Please provide the information in a friendly and engaging tone, as if you were sharing it with a friend who is visiting Barcelona for the first time."
         #res = call_GPT(model, prompt)
         result = st.write_stream(call_GPT_stream(model, prompt))
-        asyncio.run(generate_tts_progressively(result, "coral"))
+        asyncio.run(generate_tts_progressively(result, "fable"))
         #call_TTS("gpt-4o-mini-tts",result)
         #st.audio("attraction.mp3")
         
